@@ -2,33 +2,66 @@
 
 
 const ValidationContract = require('../validators/fluent-validator');
-const repository = require('../repositories/cadastro-repositroy');
+const mongoose = require('mongoose');
+const Cadastro = mongoose.model('Cadastro');
 
-exports.post = async (req, res, next) => {
-    let contract = new ValidationContract();
-    contract.hasMinLen(req.body.name, 3, 'o nome deve conter pelomenos 3 caracteres');
-    contract.isEmail(req.body.email,  'E-mail invalido');
-    contract.hasMinLen(req.body.password, 6, 'a senha deve conter pelomenos 6 caracteres');
-    contract.hasMinLenT(req.body.sexo,1);
-    /**
-     * se os dados forem invalidos
-     *
-     */
-    if (!contract.isValid()) {
-        res.status(400).send(contract.errors()).end();
-        return;
-    }
+
+exports.get = async(req, res, next) => {
 
     try {
-        await repository.create(req.body);
 
-        res.status(201).send({ message: 'Cliente cadastrado com sucesso' });
+        const cadastro = await Cadastro.find({
+            active:true
+        },'email password');
+
+        return res.status(200).send(cadastro);
 
     } catch (e) {
 
-        res.status(500).send({
-            message: 'Falha ao processar suas requisições'
-        });
+        
+        return res.status(400).send({error:' error listing clients'});
+
+    }
+
+}
+
+
+exports.post = async (req, res, next) => {
+
+    const { email } = req.body;
+
+    try {
+        if (await Cadastro.findOne({ email })) {
+            return res.status(400).send({ error: 'user already exist' });
+        }
+
+        const cadastro = Cadastro.create(req.body);
+
+        res.status(201).send({ message: 'user successfully registered' });
+
+    } catch (e) {
+
+        res.status(500).send({ message: 'it was not possible to register the user' });
     }
 };
+
+
+exports.put = async (req, res, next) => {
+
+    try {
+        const cadastro = await Cadastro.findByIdAndUpdate(req.params.id, {
+            $set: {
+                name: req.body.name,
+                password: req.body.password,
+            }
+        });
+
+        return res.status(200).send({ message: 'user updated successfully' });
+    } catch (e) {
+        return res.status(400).send({ error: 'error updated user' });
+
+    }
+
+};
+
 

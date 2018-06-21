@@ -3,10 +3,10 @@
 
 const express = require('express');
 const router = express.Router();
-const controller= require('../controllers/cadastro-controller');
+const controller= require('../controllers/pedidos-controller');
+
 
 router.get('/', controller.get); 
 router.post('/', controller.post); 
-router.put('/:id', controller.put); 
 
 module.exports = router;    

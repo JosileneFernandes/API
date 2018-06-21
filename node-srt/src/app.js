@@ -16,6 +16,7 @@ mongoose.connect('mongodb://Cleiton:cl84424671@ds147390.mlab.com:47390/nodelojar
 //carrega models
 const Product =require('./models/product');
 const Cadastro = require('./models/cadastro');
+const Pedido = require('./models/pedidos');
 
 
 
@@ -23,7 +24,7 @@ const Cadastro = require('./models/cadastro');
 const indexRoute= require('./routes/index-route'); 
 const productRoute= require('./routes/product-route'); 
 const cadastroRoute = require('./routes/cadastro-route');
-
+const pedidoRoute = require('./routes/pedidos-route');
 
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ 
@@ -33,4 +34,5 @@ app.use(bodyParse.urlencoded({
 app.use('/', indexRoute);
 app.use('/products', productRoute);
 app.use('/cadastro',cadastroRoute);
+app.use('/pedido',pedidoRoute);
 module.exports = app;

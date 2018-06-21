@@ -12,6 +12,8 @@ exports.get = async () => {
         return res;
 }
 
+
+
 exports.getBySlug = async (slug) => {
     const res = await Product
         .findOne({

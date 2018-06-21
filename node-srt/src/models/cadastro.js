@@ -24,7 +24,6 @@ const schema = new Schema({
         required: true
     }
 
-
 });
 
 module.exports = mongoose.model('Cadastro', schema);
