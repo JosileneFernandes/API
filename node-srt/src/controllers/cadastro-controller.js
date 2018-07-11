@@ -35,7 +35,7 @@ exports.post = async (req, res, next) => {
             return res.status(400).send({ error: 'user already exist' });
         }
 
-        const cadastro = Cadastro.create(req.body);
+        const cadastro = await Cadastro.create(req.body);
 
         res.status(201).send({ message: 'user successfully registered' });
 

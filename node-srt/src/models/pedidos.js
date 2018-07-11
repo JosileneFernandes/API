@@ -44,10 +44,15 @@ const schema = new Schema({
 
         product: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Product'
-        }
+            ref: 'Product'
+        },
 
-    }]
+    }],
+
+    valorFrete: {
+        type: Number,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Pedidos', schema);
