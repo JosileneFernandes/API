@@ -25,7 +25,7 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    Endereco:{
+    endereco:{
         type:String,
         required:true
     },
