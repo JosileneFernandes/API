@@ -26,6 +26,24 @@ exports.get = async(req, res, next) => {
 }
 
 
+exports.getById = async(req, res, next) => {
+
+    try {
+
+        const cadastro = await Cadastro.findById(req.params.id);
+
+        return res.status(200).send(cadastro);
+
+    } catch (e) {
+
+        
+        return res.status(400).send({error:' error listing clients'});
+
+    }
+
+}
+
+
 exports.post = async (req, res, next) => {
 
     const { email } = req.body;
