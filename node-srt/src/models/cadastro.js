@@ -26,10 +26,7 @@ const schema = new Schema({
         required: true
     },
 
-    dtn:{
-        type:Date,
-        required:true
-    },
+ 
 
     cpf:{
         type:String,

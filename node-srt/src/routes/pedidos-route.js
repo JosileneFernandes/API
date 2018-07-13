@@ -8,5 +8,6 @@ const controller= require('../controllers/pedidos-controller');
 
 router.get('/', controller.get); 
 router.post('/', controller.post); 
+router.get('/:id', controller.getById);
 
 module.exports = router;    

@@ -18,13 +18,22 @@ exports.get = async (req, res, next) => {
     }
 }
 
+
+exports.getById= async (req, res, next) => {
+    try {
+        const pedidos = await Pedidos.find({cadastro:req.params.id})
+        return res.status(200).send(pedidos);
+    } catch (e) {
+        return res.status(400).send({error:' error listing request'});
+
+    }
+}
+
+
 exports.post = async (req, res, next) => {
     try {
-        const pedidos = await Pedidos.create({
-            cadastro: req.body.cadastro,
-            number: guid.raw().substring(0,6),
-            items:req.body.items
-        });
+        const pedidos = await Pedidos.create(req.body);
+
         return res.status(200).send({ message: 'request successfully registered' })
 
     } catch (e) {
