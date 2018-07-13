@@ -27,7 +27,7 @@ const schema = new Schema({
     },
 
     dtn:{
-        type:String,
+        type:Date,
         required:true
     },
 
