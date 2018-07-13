@@ -12,7 +12,7 @@ exports.get = async(req, res, next) => {
 
         const cadastro = await Cadastro.find({
             active:true
-        },'email senha');
+        },'email password');
 
         return res.status(200).send(cadastro);
 
