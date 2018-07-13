@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
 const schema = new Schema({
-    name: {
+    nome: {
         type: String,
         required: true
     },
@@ -15,7 +15,7 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    password: {
+    senha: {
         type: String,
         required: true,
         select: false
@@ -25,6 +25,17 @@ const schema = new Schema({
         type: String,
         required: true
     },
+
+    dtn:{
+        type:String,
+        required:true
+    },
+
+    cpf:{
+        type:String,
+        required:true
+    },
+
     endereco:{
         type:String,
         required:true
@@ -37,10 +48,10 @@ const schema = new Schema({
     },
 
 });
-schema.pre('save', async function (next) {
+/*schema.pre('save', async function (next) {
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash+ global.SALT_KEY;
     next();
-})
+})*/
 
 module.exports = mongoose.model('Cadastro', schema);
