@@ -11,8 +11,8 @@ exports.get = async(req, res, next) => {
     try {
 
         const cadastro = await Cadastro.find({
-            active:true
-        },'email password');
+            
+        },'email password nome');
 
         return res.status(200).send(cadastro);
 
